@@ -2,16 +2,9 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const music = document.getElementById("bgmusic");
 
-// เล่นเพลงทันทีที่เปิดเว็บ (workaround autoplay)
-window.addEventListener("load", () => {
-  music.muted = true;
-  music.play().then(() => {
-    setTimeout(() => {
-      music.muted = false; // เปิดเสียงหลัง 0.5 วิ
-    }, 500);
-  }).catch(err => {
-    console.log("Autoplay ถูกบล็อก:", err);
-  });
+// เล่นเพลงเมื่อกดปุ่ม NO
+noBtn.addEventListener("click", () => {
+  music.play();
 });
 
 // ปุ่ม No หนีเมาส์
@@ -22,7 +15,7 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.top = y + "px";
 });
 
-// ปุ่ม Yes
+// ปุ่ม YES
 yesBtn.addEventListener("click", () => {
-  alert("ดีใจที่สุดเลย 💖 ผมรักพี่นะ!!");
+  alert("ดีใจที่สุดเลย 💖 ผมรักพี่นะคับบ!");
 });
