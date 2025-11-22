@@ -9,41 +9,49 @@ body {
 }
 
 .container {
+  position: relative;
   text-align: center;
   background: white;
-  padding: 40px;
+  padding: 50px 30px;
   border-radius: 25px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 400px;
 }
 
 h1 {
   color: #ff5f9e;
-  font-size: 40px;
+  font-size: 36px;
 }
 
 .btn-box {
-  margin-top: 20px;
+  margin-top: 30px;
+  position: relative;
+  height: 80px; /* กำหนดพื้นที่ให้ปุ่ม NO วิ่งได้ */
 }
 
 button {
-  padding: 12px 25px;
-  margin: 10px;
+  padding: 12px 30px;
   font-size: 20px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.2s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #yesBtn {
   background: #ff89c6;
   color: white;
+  left: 10%;
 }
 
 #noBtn {
   background: #ffd1d9;
   color: black;
-  position: absolute;
+  left: 60%;
 }
 
 button:hover {
