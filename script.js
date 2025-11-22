@@ -24,5 +24,5 @@ noBtn.addEventListener("mouseover", () => {
 
 // ปุ่ม Yes
 yesBtn.addEventListener("click", () => {
-  alert("ดีใจที่สุดเลย 💖 เรารักพี่นะ!");
+  alert("ดีใจที่สุดเลย 💖 ผมรักพี่นะ!!");
 });
