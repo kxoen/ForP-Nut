@@ -2,16 +2,19 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const music = document.getElementById("bgmusic");
 
-// เริ่มเล่นเพลงครั้งแรกที่มีการกดปุ่มใดก็ตาม
-let musicStarted = false;
-function startMusic() {
-  if (!musicStarted) {
-    music.play();
-    musicStarted = true;
-  }
-}
+// เล่นเพลงทันทีที่เปิดเว็บ (workaround autoplay)
+window.addEventListener("load", () => {
+  music.muted = true;
+  music.play().then(() => {
+    setTimeout(() => {
+      music.muted = false; // เปิดเสียงหลัง 0.5 วิ
+    }, 500);
+  }).catch(err => {
+    console.log("Autoplay ถูกบล็อก:", err);
+  });
+});
 
-// ปุ่ม No หนีได้
+// ปุ่ม No หนีเมาส์
 noBtn.addEventListener("mouseover", () => {
   const x = Math.random() * window.innerWidth * 0.8;
   const y = Math.random() * window.innerHeight * 0.8;
@@ -21,9 +24,5 @@ noBtn.addEventListener("mouseover", () => {
 
 // ปุ่ม Yes
 yesBtn.addEventListener("click", () => {
-  startMusic();
-  alert("ดีใจที่สุดเลย 💖 ผมรักพี่นะ!!");
+  alert("ดีใจที่สุดเลย 💖 เรารักพี่นะ!");
 });
-
-// เผื่อคลิก No ก็ให้เพลงเริ่ม
-noBtn.addEventListener("click", startMusic);
