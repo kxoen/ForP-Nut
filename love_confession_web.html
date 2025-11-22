@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ถึงพี่คนพิเศษ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .message {
+            font-size: 1.3em;
+            color: #333;
+            line-height: 1.8;
+            margin: 20px 0;
+            opacity: 0;
+            animation: slideIn 1s ease-in 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .heart {
+            font-size: 3em;
+            color: #ff6b6b;
+            margin: 30px 0;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+        }
+
+        .button-container {
+            position: relative;
+            height: 100px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        button {
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #a8a8a8 0%, #8a8a8a 100%);
+            transition: all 0.2s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .final-message {
+            font-size: 1.5em;
+            color: #764ba2;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .sad-message {
+            font-size: 1.3em;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2em;
+            color: #ff6b6b;
+            animation: float 4s infinite ease-in;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="https://drive.google.com/uc?export=download&id=1gakBMRW7-l6AvfxgsB7ZcrJ_X5pI8GPh" type="audio/mpeg">
+    </audio>
+    
+    <div class="container">
+        <div id="question">
+            <h1>ถามจริงๆ นะครับพี่</h1>
+            <div class="heart">💕</div>
+            <div class="message">
+                ผมชอบพี่<br>
+                ชอบมากๆ เลย<br>
+                <br>
+                พี่มีใจให้ผมมั้ยย?
+            </div>
+            <div class="button-container">
+                <button class="btn-yes" onclick="sayYes()">ใช่ ❤️</button>
+                <button class="btn-no" id="btnNo" onmouseover="runAway()" ontouchstart="runAway(event)">ไม่</button>
+            </div>
+        </div>
+
+        <div id="yesAnswer" class="hidden">
+            <h1>💝 เย้!พี่มีใจให้ผมด้วยยย 💝</h1>
+            <div class="heart">💗</div>
+            <div class="final-message">
+                ขอบคุณที่มีใจให้นะคับบ<br>
+                <br>
+                ผมจะทำให้พี่ปวดหัวเยอะๆๆๆ<br>
+                <br>
+                จะดื้อให้สุดๆๆๆ 💕💕💕
+            </div>
+        </div>
+
+        <div id="noAnswer" class="hidden">
+            <h1>😢</h1>
+            <div class="heart">💔</div>
+            <div class="sad-message">
+                เสียใจนะครับ...<br>
+                <br>
+                แต่ไม่เป็นไรครับ<br>
+                ผมเข้าใจ<br>
+                <br>
+                ยังไงผมก็ขอให้พี่มีความสุขมากๆ นะครับ 🙏
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let runCount = 0;
+
+        function runAway(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            
+            const btn = document.getElementById('btnNo');
+            
+            runCount++;
+            
+            // สุ่มตำแหน่งใหม่ให้หนีออกไป (รองรับทั้งมือถือและคอม)
+            const maxWidth = window.innerWidth - 150;
+            const maxHeight = window.innerHeight - 100;
+            
+            const randomX = Math.random() * maxWidth;
+            const randomY = Math.random() * maxHeight;
+            
+            btn.style.position = 'fixed';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+            
+            // ยิ่งพยายามกดมาก ปุ่มยิ่งเล็ก
+            if (runCount > 3) {
+                btn.style.transform = 'scale(0.8)';
+            }
+            if (runCount > 6) {
+                btn.style.transform = 'scale(0.6)';
+            }
+            if (runCount > 10) {
+                btn.style.transform = 'scale(0.4)';
+            }
+        }
+
+        function sayYes() {
+            document.getElementById('question').classList.add('hidden');
+            document.getElementById('yesAnswer').classList.remove('hidden');
+            createManyHearts();
+        }
+
+        function sayNo() {
+            // ฟังก์ชันนี้จะไม่ทำงานเพราะไม่มี onclick บนปุ่มแล้ว
+            // ปุ่ม "ไม่" กดไม่ได้จริงๆ!
+        }
+
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 200);
+            }
+        }
+
+        function createManyHearts() {
+            const container = document.getElementById('floatingHearts');
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.innerHTML = ['💕', '💖', '💗', '💝'][Math.floor(Math.random() * 4)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 100);
+            }
+        }
+
+        // สร้างหัวใจลอยเล็กน้อยตอนเริ่มต้น
+        createFloatingHearts();
+        
+        // เล่นเพลงพื้นหลัง
+        window.addEventListener('click', function() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log('Auto-play prevented'));
+        }, { once: true });
+        
+        window.addEventListener('touchstart', function() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log('Auto-play prevented'));
+        }, { once: true });
+    </script>
+</body>
+</html>
