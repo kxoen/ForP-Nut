@@ -2,9 +2,10 @@
 
 body {
     font-family: 'Itim', cursive;
-    background: linear-gradient(#ffdde1, #ee9ca7); /* โทนชมพูพาสเทล */
+    background: linear-gradient(#ffdde1, #ee9ca7);
     text-align: center;
     padding-top: 150px;
+    overflow: hidden;
 }
 
 .container {
@@ -13,12 +14,8 @@ body {
     border-radius: 25px;
     width: 400px;
     margin: auto;
-    box-shadow: 0 0 25px rgba(255, 150, 180, 0.5); /* เงาสีชมพู */
+    box-shadow: 0 0 25px rgba(255, 150, 180, 0.5);
     backdrop-filter: blur(10px);
-}
-
-h1, h2, p {
-    color: #444;
 }
 
 .btn {
@@ -40,15 +37,21 @@ h1, h2, p {
 
 .yes-btn {
     background: #ff6699;
-    color: white;
 }
 
-/* ปุ่ม No ขยับหนี */
 .no-btn {
     position: absolute;
     background: #ffd6e9;
 }
 
-audio {
-    display: none; /* ซ่อนเครื่องเล่นเสียง */
+.heart {
+    position: absolute;
+    font-size: 24px;
+    animation: floatUp 4s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-600px); opacity: 0; }
 }
