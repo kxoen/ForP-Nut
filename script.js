@@ -7,8 +7,8 @@ noBtn.addEventListener("click", () => {
   music.play();
 });
 
-// ปุ่ม NO หนี
-noBtn.addEventListener("mouseover", () => {
+// ฟังก์ชันหนี
+function moveNoButton() {
   const container = document.querySelector('.btn-box');
   const containerRect = container.getBoundingClientRect();
   
@@ -23,9 +23,14 @@ noBtn.addEventListener("mouseover", () => {
 
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
-});
+}
+
+// หนีบน PC
+noBtn.addEventListener("mouseover", moveNoButton);
+// หนีบนมือถือ
+noBtn.addEventListener("touchstart", moveNoButton);
 
 // ปุ่ม YES
 yesBtn.addEventListener("click", () => {
-  alert("ดีใจที่สุดเลย 💖 ผมรักพี่นัทที่สุดเลยย");
+  alert("ดีใจที่สุดเลย 💖 ผมรักพี่นัทที่สุดเลยยย");
 });
